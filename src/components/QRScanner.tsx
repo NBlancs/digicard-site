@@ -65,10 +65,9 @@ const QRScanner: React.FC = () => {
         digital_card_link: cardLink,
       };
 
-      // @ts-expect-error - Supabase type generation issue
-      const { error } = await supabase
+      const { error } = await (supabase
         .from('scanned_students')
-        .upsert([studentData], { onConflict: 'school_id' });
+        .upsert([studentData], { onConflict: 'school_id' }) as any);
 
       if (error) throw error;
 
