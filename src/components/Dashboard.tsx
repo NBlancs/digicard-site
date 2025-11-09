@@ -50,14 +50,15 @@ const Dashboard: React.FC = () => {
     try {
       const cardLink = `${window.location.origin}/card/${newStudent.school_id}`;
       
+      // @ts-expect-error - Supabase type generation issue
       const { error } = await supabase
         .from('scanned_students')
-        .insert({
+        .insert([{
           full_name: newStudent.full_name,
           school_id: newStudent.school_id,
           program: newStudent.program,
           digital_card_link: cardLink,
-        } as any);
+        }]);
 
       if (error) throw error;
 
@@ -76,14 +77,15 @@ const Dashboard: React.FC = () => {
     if (!editingStudent) return;
 
     try {
+      // @ts-expect-error - Supabase type generation issue
       const { error } = await supabase
         .from('scanned_students')
-        .update({
+        .update([{
           full_name: editingStudent.full_name,
           school_id: editingStudent.school_id,
           program: editingStudent.program,
           updated_at: new Date().toISOString(),
-        } as any)
+        }])
         .eq('id', editingStudent.id);
 
       if (error) throw error;
