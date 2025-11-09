@@ -65,9 +65,9 @@ const QRScanner: React.FC = () => {
         digital_card_link: cardLink,
       };
 
-      const { error } = await (supabase
+      const { error } = await supabase
         .from('scanned_students')
-        .upsert([studentData], { onConflict: 'school_id' }) as any);
+        .upsert(studentData, { onConflict: 'school_id' });
 
       if (error) throw error;
 
