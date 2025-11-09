@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from 'react';
+import { useNavigate } from 'react-router-dom';
 import { supabase } from '../lib/supabase';
 import type { Student } from '../types/database';
 import './Dashboard.css';
@@ -11,6 +12,7 @@ interface EditingStudent {
 }
 
 const Dashboard: React.FC = () => {
+  const navigate = useNavigate();
   const [students, setStudents] = useState<Student[]>([]);
   const [loading, setLoading] = useState(true);
   const [editingStudent, setEditingStudent] = useState<EditingStudent | null>(null);
@@ -268,14 +270,12 @@ const Dashboard: React.FC = () => {
                   </td>
                   <td>
                     <div className="card-link-cell">
-                      <a 
-                        href={student.digital_card_link} 
-                        target="_blank" 
-                        rel="noopener noreferrer"
+                      <button
+                        onClick={() => navigate(`/card/${student.school_id}`)}
                         className="link-button"
                       >
                         View Card
-                      </a>
+                      </button>
                       <button 
                         onClick={() => copyLink(student.digital_card_link)}
                         className="copy-button"

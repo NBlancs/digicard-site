@@ -178,23 +178,161 @@
   flex-wrap: wrap;
 }
 
+/* Modal Styles */
+.modal-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: rgba(0, 0, 0, 0.7);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 9999;
+  animation: fadeIn 0.3s ease-in-out;
+}
+
+.modal-content {
+  background: white;
+  padding: 40px;
+  border-radius: 20px;
+  text-align: center;
+  max-width: 90%;
+  width: 400px;
+  box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
+  animation: slideUp 0.3s ease-in-out;
+}
+
+.modal-icon {
+  font-size: 64px;
+  color: #48bb78;
+  margin-bottom: 20px;
+  animation: checkmark 0.5s ease-in-out;
+}
+
+.modal-text {
+  font-size: 20px;
+  font-weight: 600;
+  color: #1a202c;
+  white-space: pre-line;
+  line-height: 1.6;
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+@keyframes slideUp {
+  from {
+    transform: translateY(30px);
+    opacity: 0;
+  }
+  to {
+    transform: translateY(0);
+    opacity: 1;
+  }
+}
+
+@keyframes checkmark {
+  0% {
+    transform: scale(0);
+  }
+  50% {
+    transform: scale(1.2);
+  }
+  100% {
+    transform: scale(1);
+  }
+}
+
 @media (max-width: 640px) {
   .scanner-container {
     padding: 10px;
   }
 
   .scanner-content {
-    padding: 20px;
+    padding: 15px;
+  }
+
+  .scanner-header h2 {
+    font-size: 22px;
+  }
+
+  .scanner-header p {
+    font-size: 14px;
+  }
+
+  .qr-reader {
+    max-width: 100%;
   }
 
   .btn {
-    padding: 10px 20px;
-    font-size: 14px;
+    padding: 12px 20px;
+    font-size: 15px;
+    width: 100%;
+    justify-content: center;
+  }
+
+  .btn-icon {
+    font-size: 18px;
+  }
+
+  .scanner-controls {
+    flex-direction: column;
+    width: 100%;
   }
 
   .data-field {
     flex-direction: column;
     align-items: flex-start;
     gap: 8px;
+  }
+
+  .action-buttons {
+    flex-direction: column;
+    width: 100%;
+  }
+
+  .modal-content {
+    padding: 30px 20px;
+    width: 90%;
+  }
+
+  .modal-icon {
+    font-size: 48px;
+  }
+
+  .modal-text {
+    font-size: 18px;
+  }
+
+  .extracted-data {
+    padding: 16px;
+  }
+
+  .extracted-data h3 {
+    font-size: 18px;
+  }
+}
+
+/* Mobile landscape orientation */
+@media (max-width: 900px) and (orientation: landscape) {
+  .qr-reader {
+    max-width: 350px;
+    max-height: 350px;
+  }
+
+  .scanner-container {
+    padding: 10px;
+  }
+
+  .scanner-content {
+    padding: 15px;
   }
 }

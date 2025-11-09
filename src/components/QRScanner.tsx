@@ -14,6 +14,8 @@ const QRScanner: React.FC = () => {
   const [scanning, setScanning] = useState(false);
   const [extractedData, setExtractedData] = useState<ExtractedData | null>(null);
   const [message, setMessage] = useState<{ text: string; type: 'success' | 'error' | 'info' }>({ text: '', type: 'info' });
+  const [showModal, setShowModal] = useState(false);
+  const [modalMessage, setModalMessage] = useState('');
   const scannerRef = useRef<Html5Qrcode | null>(null);
   const scannerDivRef = useRef<HTMLDivElement>(null);
 
@@ -53,7 +55,7 @@ const QRScanner: React.FC = () => {
   };
 
   // Save student to Supabase
-  const saveStudent = async (data: ExtractedData) => {
+  const saveStudent = async (data: ExtractedData, showModalNotification: boolean = false) => {
     try {
       // Generate unique digital card link
       const cardLink = `${window.location.origin}/card/${data.schoolId}`;
@@ -71,10 +73,22 @@ const QRScanner: React.FC = () => {
 
       if (error) throw error;
 
-      setMessage({ text: `✓ Student saved successfully! Card link: ${cardLink}`, type: 'success' });
+      if (showModalNotification) {
+        setModalMessage(`Student Added!\n${data.fullName}\nID: ${data.schoolId}`);
+        setShowModal(true);
+        setTimeout(() => setShowModal(false), 3000);
+      } else {
+        setMessage({ text: `✓ Student saved successfully! Card link: ${cardLink}`, type: 'success' });
+      }
       return true;
     } catch (error: any) {
-      setMessage({ text: `Error saving student: ${error.message}`, type: 'error' });
+      if (showModalNotification) {
+        setModalMessage(`Error: ${error.message}`);
+        setShowModal(true);
+        setTimeout(() => setShowModal(false), 3000);
+      } else {
+        setMessage({ text: `Error saving student: ${error.message}`, type: 'error' });
+      }
       return false;
     }
   };
@@ -90,6 +104,7 @@ const QRScanner: React.FC = () => {
         {
           fps: 10,
           qrbox: { width: 250, height: 250 },
+          aspectRatio: 1.0,
         },
         async (decodedText) => {
           // Stop scanner after successful scan
@@ -99,13 +114,19 @@ const QRScanner: React.FC = () => {
           const extracted = extractStudentData(decodedText);
           
           if (extracted) {
-            setExtractedData(extracted);
-            setMessage({ text: 'QR code scanned successfully! Review data below.', type: 'success' });
+            // Automatically save student
+            const success = await saveStudent(extracted, true);
+            if (success) {
+              // Reset and allow new scan after delay
+              setTimeout(() => {
+                setExtractedData(null);
+                setMessage({ text: '', type: 'info' });
+              }, 3000);
+            }
           } else {
-            setMessage({ 
-              text: 'Could not extract student data. Please ensure QR code format is: "NAME SCHOOLID PROGRAM"', 
-              type: 'error' 
-            });
+            setModalMessage('Invalid QR Code Format!\nExpected: NAME SCHOOLID PROGRAM');
+            setShowModal(true);
+            setTimeout(() => setShowModal(false), 3000);
           }
         },
         () => {
@@ -134,10 +155,10 @@ const QRScanner: React.FC = () => {
     }
   };
 
-  // Handle save button
+  // Handle save button (for manual saves if needed)
   const handleSave = async () => {
     if (extractedData) {
-      const success = await saveStudent(extractedData);
+      const success = await saveStudent(extractedData, false);
       if (success) {
         // Reset after successful save
         setTimeout(() => {
@@ -159,6 +180,16 @@ const QRScanner: React.FC = () => {
 
   return (
     <div className="scanner-container">
+      {/* Modal Notification */}
+      {showModal && (
+        <div className="modal-overlay">
+          <div className="modal-content">
+            <div className="modal-icon">✓</div>
+            <div className="modal-text">{modalMessage}</div>
+          </div>
+        </div>
+      )}
+
       <div className="scanner-header">
         <h2>QR Code Scanner</h2>
         <p>Scan student ID QR codes to register members</p>

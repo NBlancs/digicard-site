@@ -228,6 +228,8 @@
   font-size: 12px;
   font-weight: 600;
   transition: all 0.2s;
+  border: none;
+  cursor: pointer;
 }
 
 .link-button:hover {
