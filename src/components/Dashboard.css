@@ -1,7 +1,8 @@
 .dashboard-container {
   max-width: 1400px;
   margin: 0 auto;
-  padding: 20px;
+  padding: 32px 24px;
+  background: #F8FBFF;
 }
 
 .dashboard-header {
@@ -14,15 +15,15 @@
 }
 
 .dashboard-header h2 {
-  font-size: 28px;
-  font-weight: 700;
-  color: #1a202c;
+  font-size: 24px;
+  font-weight: 800;
+  color: var(--primary);
   margin-bottom: 4px;
 }
 
 .dashboard-header p {
-  font-size: 16px;
-  color: #718096;
+  font-size: 13px;
+  color: var(--muted);
 }
 
 .loading {
@@ -78,7 +79,8 @@
 }
 
 .btn-add {
-  background: linear-gradient(135deg, #48bb78 0%, #38a169 100%);
+  background: #22A2F2;
+  background: radial-gradient(circle, rgba(34, 162, 242, 1) 0%, rgba(4, 104, 191, 1) 0%, rgba(2, 62, 115, 1) 85%);
   color: white;
 }
 
@@ -88,7 +90,8 @@
 }
 
 .btn-primary {
-  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  background: #22A2F2;
+  background: radial-gradient(circle, rgba(34, 162, 242, 1) 0%, rgba(4, 104, 191, 1) 0%, rgba(2, 62, 115, 1) 85%);
   color: white;
 }
 
@@ -175,7 +178,8 @@
 }
 
 .students-table thead {
-  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  background: #22A2F2;
+  background: radial-gradient(circle, rgba(34, 162, 242, 1) 0%, rgba(4, 104, 191, 1) 0%, rgba(2, 62, 115, 1) 85%);
   color: white;
 }
 
@@ -205,12 +209,12 @@
 
 .badge {
   display: inline-block;
-  padding: 4px 12px;
-  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  padding: 6px 12px;
+  background: linear-gradient(90deg, var(--primary), var(--accent));
   color: white;
-  border-radius: 12px;
+  border-radius: 999px;
   font-size: 12px;
-  font-weight: 600;
+  font-weight: 700;
 }
 
 .card-link-cell {
@@ -220,21 +224,21 @@
 }
 
 .link-button {
-  padding: 6px 12px;
-  background: #e2e8f0;
-  color: #2d3748;
+  padding: 8px 14px;
+  background: white;
+  color: var(--primary);
   text-decoration: none;
-  border-radius: 6px;
-  font-size: 12px;
-  font-weight: 600;
-  transition: all 0.2s;
-  border: none;
+  border-radius: 8px;
+  font-size: 13px;
+  font-weight: 700;
+  transition: all 0.18s ease;
+  border: 1px solid rgba(0,122,255,0.08);
   cursor: pointer;
 }
 
 .link-button:hover {
-  background: #cbd5e0;
-  transform: translateY(-1px);
+  transform: translateY(-2px);
+  box-shadow: 0 8px 20px rgba(0,122,255,0.08);
 }
 
 .copy-button {
@@ -244,6 +248,9 @@
   cursor: pointer;
   font-size: 16px;
   transition: transform 0.2s;
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
 
 .copy-button:hover {
@@ -263,6 +270,9 @@
   font-size: 18px;
   border-radius: 6px;
   transition: all 0.2s;
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
 
 .btn-icon-action.edit:hover {
@@ -282,8 +292,10 @@
 
 .empty-icon {
   font-size: 64px;
-  display: block;
+  display: flex;
+  justify-content: center;
   margin-bottom: 16px;
+  color: #a0aec0;
 }
 
 .empty-state h3 {
@@ -313,8 +325,79 @@
 }
 
 .dashboard-footer strong {
-  color: #667eea;
+  color: #0066FF;
   font-size: 18px;
+}
+
+/* Pagination Styles */
+.pagination {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 12px;
+  margin-top: 24px;
+  padding: 20px;
+  background: white;
+  border-radius: 12px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.pagination-btn {
+  padding: 10px 20px;
+  background: #22A2F2;
+  background: radial-gradient(circle, rgba(34, 162, 242, 1) 0%, rgba(4, 104, 191, 1) 0%, rgba(2, 62, 115, 1) 85%);
+  color: white;
+  border: none;
+  border-radius: 8px;
+  font-weight: 600;
+  font-size: 14px;
+  cursor: pointer;
+  transition: all 0.2s;
+}
+
+.pagination-btn:hover:not(:disabled) {
+  background: #0052CC;
+  transform: translateY(-2px);
+  box-shadow: 0 4px 12px rgba(0, 102, 255, 0.3);
+}
+
+.pagination-btn:disabled {
+  background: #E2E8F0;
+  color: #A0AEC0;
+  cursor: not-allowed;
+  transform: none;
+}
+
+.pagination-numbers {
+  display: flex;
+  gap: 6px;
+}
+
+.pagination-number {
+  width: 40px;
+  height: 40px;
+  padding: 0;
+  background: white;
+  color: #2D3748;
+  border: 2px solid #E2E8F0;
+  border-radius: 8px;
+  font-weight: 600;
+  font-size: 14px;
+  cursor: pointer;
+  transition: all 0.2s;
+}
+
+.pagination-number:hover {
+  background: #E8F0FE;
+  border-color: #0066FF;
+  color: #0066FF;
+}
+
+.pagination-number.active {
+  background: #22A2F2;
+  background: radial-gradient(circle, rgba(34, 162, 242, 1) 0%, rgba(4, 104, 191, 1) 0%, rgba(2, 62, 115, 1) 85%);
+  border-color: #0468BF;
+  color: white;
 }
 
 @media (max-width: 1024px) {
@@ -344,5 +427,21 @@
   .btn {
     width: 100%;
     justify-content: center;
+  }
+
+  .pagination {
+    flex-wrap: wrap;
+    gap: 8px;
+  }
+
+  .pagination-btn {
+    padding: 8px 16px;
+    font-size: 13px;
+  }
+
+  .pagination-number {
+    width: 36px;
+    height: 36px;
+    font-size: 13px;
   }
 }

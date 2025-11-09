@@ -1,5 +1,6 @@
 import React, { useEffect, useRef, useState } from 'react';
 import { Html5Qrcode } from 'html5-qrcode';
+import { IoCameraOutline, IoStopCircleOutline, IoSaveOutline, IoCloseCircleOutline, IoCheckmarkCircleOutline } from 'react-icons/io5';
 import { supabase } from '../lib/supabase';
 import type { StudentInsert } from '../types/database';
 import './QRScanner.css';
@@ -184,7 +185,7 @@ const QRScanner: React.FC = () => {
       {showModal && (
         <div className="modal-overlay">
           <div className="modal-content">
-            <div className="modal-icon">✓</div>
+            <IoCheckmarkCircleOutline className="modal-icon" />
             <div className="modal-text">{modalMessage}</div>
           </div>
         </div>
@@ -201,14 +202,14 @@ const QRScanner: React.FC = () => {
         <div className="scanner-controls">
           {!scanning && !extractedData && (
             <button onClick={startScanning} className="btn btn-primary">
-              <span className="btn-icon">📷</span>
+              <IoCameraOutline className="btn-icon" />
               Start Scanner
             </button>
           )}
 
           {scanning && (
             <button onClick={stopScanning} className="btn btn-danger">
-              <span className="btn-icon">⏹</span>
+              <IoStopCircleOutline className="btn-icon" />
               Stop Scanner
             </button>
           )}
@@ -239,7 +240,7 @@ const QRScanner: React.FC = () => {
             </div>
             <div className="action-buttons">
               <button onClick={handleSave} className="btn btn-success">
-                <span className="btn-icon">💾</span>
+                <IoSaveOutline className="btn-icon" />
                 Save to Database
               </button>
               <button 
@@ -249,7 +250,7 @@ const QRScanner: React.FC = () => {
                 }} 
                 className="btn btn-secondary"
               >
-                <span className="btn-icon">❌</span>
+                <IoCloseCircleOutline className="btn-icon" />
                 Cancel
               </button>
             </div>

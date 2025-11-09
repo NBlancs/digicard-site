@@ -1,7 +1,8 @@
 .scanner-container {
   max-width: 800px;
   margin: 0 auto;
-  padding: 20px;
+  padding: 32px 24px;
+  background: #F8FBFF;
 }
 
 .scanner-header {
@@ -62,16 +63,19 @@
 
 .btn-icon {
   font-size: 20px;
+  display: flex;
+  align-items: center;
 }
 
 .btn-primary {
-  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  background: #22A2F2;
+  background: radial-gradient(circle, rgba(34, 162, 242, 1) 0%, rgba(4, 104, 191, 1) 0%, rgba(2, 62, 115, 1) 85%);
   color: white;
 }
 
 .btn-primary:hover {
   transform: translateY(-2px);
-  box-shadow: 0 10px 20px rgba(102, 126, 234, 0.3);
+  box-shadow: 0 10px 20px rgba(34, 162, 242, 0.3);
 }
 
 .btn-danger {
@@ -85,13 +89,14 @@
 }
 
 .btn-success {
-  background: linear-gradient(135deg, #48bb78 0%, #38a169 100%);
+  background: #22A2F2;
+  background: radial-gradient(circle, rgba(34, 162, 242, 1) 0%, rgba(4, 104, 191, 1) 0%, rgba(2, 62, 115, 1) 85%);
   color: white;
 }
 
 .btn-success:hover {
   transform: translateY(-2px);
-  box-shadow: 0 10px 20px rgba(72, 187, 120, 0.3);
+  box-shadow: 0 10px 20px rgba(34, 162, 242, 0.3);
 }
 
 .btn-secondary {
@@ -209,6 +214,8 @@
   color: #48bb78;
   margin-bottom: 20px;
   animation: checkmark 0.5s ease-in-out;
+  display: flex;
+  justify-content: center;
 }
 
 .modal-text {

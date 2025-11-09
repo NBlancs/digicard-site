@@ -27,6 +27,23 @@ body {
   min-height: 100vh;
 }
 
+  :root {
+    --primary: #007BFF; /* electric blue */
+    --accent: #00A8FF;
+    --bg: #ffffff;
+    --muted: #718096;
+    --surface: #ffffff;
+    --glass: rgba(255,255,255,0.75);
+  }
+
+  body {
+    font-family: 'Inter', 'Poppins', 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
+    background: linear-gradient(180deg, #f7fbff 0%, #ffffff 100%);
+    color: #0f172a;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+  }
+
 #root {
   min-height: 100vh;
 }

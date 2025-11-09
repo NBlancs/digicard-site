@@ -1,5 +1,6 @@
 import React from 'react';
 import { BrowserRouter as Router, Routes, Route, Link, Navigate } from 'react-router-dom';
+import { IoGridOutline, IoQrCodeOutline } from 'react-icons/io5';
 import { supabase } from './lib/supabase';
 import Login from './components/Login';
 import Dashboard from './components/Dashboard';
@@ -64,18 +65,19 @@ const App: React.FC = () => {
                   <nav className="navbar">
                     <div className="nav-content">
                       <div className="nav-brand">
-                        <span className="brand-icon">🎓</span>
-                        <span className="brand-text">ID Scanner & Digital Card</span>
+                        <span className="brand-text">SITE ID Scanner & Digital Card</span>
                       </div>
                       <div className="nav-links">
                         <Link to="/dashboard" className="nav-link">
-                          📊 Dashboard
+                          <IoGridOutline size={20} />
+                          Dashboard
                         </Link>
                         <Link to="/scanner" className="nav-link">
-                          📷 Scanner
+                          <IoQrCodeOutline size={20} />
+                          Scanner
                         </Link>
                         <button onClick={handleLogout} className="logout-btn">
-                          🚪 Logout
+                          Logout
                         </button>
                       </div>
                     </div>
@@ -93,7 +95,7 @@ const App: React.FC = () => {
 
                   {/* Footer */}
                   <footer className="app-footer">
-                    <p>&copy; 2025 ID Scanner & Digital Card Generator. All rights reserved.</p>
+                    <p>&copy; 2025 SITE USTP-CDO ID Scanner & Digital Card Generator. All rights reserved.</p>
                   </footer>
                 </div>
               }

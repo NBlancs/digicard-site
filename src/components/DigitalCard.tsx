@@ -1,9 +1,11 @@
 import React, { useEffect, useState } from 'react';
 import { useParams } from 'react-router-dom';
 import { QRCodeSVG } from 'qrcode.react';
+import { IoCloseCircleOutline, IoPrintOutline, IoShareOutline, IoPersonCircleOutline } from 'react-icons/io5';
 import { supabase } from '../lib/supabase';
 import type { Student } from '../types/database';
 import './DigitalCard.css';
+import logo from '../assets/site_logo.png';
 
 const DigitalCard: React.FC = () => {
   const { schoolId } = useParams<{ schoolId: string }>();
@@ -47,7 +49,7 @@ const DigitalCard: React.FC = () => {
     return (
       <div className="card-page">
         <div className="error-card">
-          <span className="error-icon">❌</span>
+          <IoCloseCircleOutline className="error-icon" />
           <h2>Card Not Found</h2>
           <p>{error || 'This digital membership card does not exist.'}</p>
         </div>
@@ -62,11 +64,11 @@ const DigitalCard: React.FC = () => {
         <div className="card-header">
           <div className="club-logo">
             <div className="logo-circle">
-              <span className="logo-text">SC</span>
+              <img src={logo} alt="SITE Logo" className="logo-image" />
             </div>
           </div>
           <div className="club-info">
-            <h1 className="club-name">Student Club</h1>
+            <h1 className="club-name">SITE USTP-CDO</h1>
             <p className="club-tagline">Digital Membership</p>
           </div>
           <div className="status-badge active">
@@ -78,7 +80,7 @@ const DigitalCard: React.FC = () => {
         {/* Avatar Section */}
         <div className="avatar-section">
           <div className="avatar-placeholder">
-            <span className="avatar-icon">👤</span>
+              <IoPersonCircleOutline className="avatar-icon" size={80} />
           </div>
         </div>
 
@@ -90,7 +92,7 @@ const DigitalCard: React.FC = () => {
           </div>
 
           <div className="info-field">
-            <label>MEMBERSHIP ID</label>
+            <label>School ID</label>
             <p className="info-value">{student.school_id}</p>
           </div>
 
@@ -99,10 +101,10 @@ const DigitalCard: React.FC = () => {
             <p className="info-value">{student.program}</p>
           </div>
 
-          <div className="info-field">
+          {/* <div className="info-field">
             <label>EXPIRATION DATE</label>
             <p className="info-value">December 31, 2025</p>
-          </div>
+          </div> */}
         </div>
 
         {/* QR Code Section */}
@@ -131,7 +133,7 @@ const DigitalCard: React.FC = () => {
           onClick={() => window.print()} 
           className="action-btn print-btn"
         >
-          🖨️ Print Card
+          <IoPrintOutline style={{ marginRight: 8 }} /> Print Card
         </button>
         <button 
           onClick={() => {
@@ -140,7 +142,7 @@ const DigitalCard: React.FC = () => {
           }}
           className="action-btn share-btn"
         >
-          🔗 Share Link
+          <IoShareOutline style={{ marginRight: 8 }} /> Share Link
         </button>
       </div>
     </div>

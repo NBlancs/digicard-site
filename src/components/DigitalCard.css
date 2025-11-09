@@ -1,6 +1,6 @@
 .card-page {
   min-height: 100vh;
-  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  background: #F8FBFF;
   display: flex;
   flex-direction: column;
   justify-content: center;
@@ -20,8 +20,10 @@
 
 .error-icon {
   font-size: 64px;
-  display: block;
+  display: flex;
+  justify-content: center;
   margin-bottom: 20px;
+  color: #e53e3e;
 }
 
 .error-card h2 {
@@ -37,15 +39,16 @@
 
 /* Digital Card Styles */
 .digital-card {
-  background: linear-gradient(180deg, #1a202c 0%, #2d3748 100%);
+  background: linear-gradient(180deg, #003D99 0%, #0066FF 100%);
   width: 100%;
   max-width: 420px;
   border-radius: 24px;
   padding: 32px;
-  box-shadow: 0 25px 80px rgba(0, 0, 0, 0.4);
+  box-shadow: 0 12px 40px rgba(0, 61, 153, 0.25);
   color: white;
   position: relative;
   overflow: hidden;
+  border: 2px solid rgba(255, 255, 255, 0.1);
 }
 
 /* Decorative background pattern */
@@ -78,18 +81,19 @@
 .logo-circle {
   width: 56px;
   height: 56px;
-  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  background: #FFFFFF;
   border-radius: 50%;
   display: flex;
   align-items: center;
   justify-content: center;
-  box-shadow: 0 4px 12px rgba(102, 126, 234, 0.4);
+  box-shadow: 0 4px 12px rgba(255, 255, 255, 0.2);
+  padding: 4px;
 }
 
-.logo-text {
-  font-size: 24px;
-  font-weight: 700;
-  color: white;
+.logo-image {
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
 }
 
 .club-info {
@@ -155,17 +159,20 @@
 .avatar-placeholder {
   width: 120px;
   height: 120px;
-  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  background: #FFFFFF;
   border-radius: 50%;
   display: flex;
   align-items: center;
   justify-content: center;
-  box-shadow: 0 8px 24px rgba(102, 126, 234, 0.4);
-  border: 4px solid rgba(255, 255, 255, 0.2);
+  box-shadow: 0 8px 24px rgba(255, 255, 255, 0.2);
+  border: 4px solid rgba(255, 255, 255, 0.3);
 }
 
 .avatar-icon {
-  font-size: 64px;
+  color: #0066FF;
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
 
 /* Member Information */
@@ -276,24 +283,27 @@
 }
 
 .print-btn {
-  background: white;
-  color: #2d3748;
+  background: #0066FF;
+  color: white;
+  border: 2px solid #0066FF;
 }
 
 .print-btn:hover {
   transform: translateY(-2px);
-  box-shadow: 0 8px 20px rgba(255, 255, 255, 0.3);
+  box-shadow: 0 8px 20px rgba(0, 102, 255, 0.3);
+  background: #0052CC;
 }
 
 .share-btn {
-  background: rgba(255, 255, 255, 0.2);
-  color: white;
-  backdrop-filter: blur(10px);
+  background: white;
+  color: #0066FF;
+  border: 2px solid #0066FF;
 }
 
 .share-btn:hover {
-  background: rgba(255, 255, 255, 0.3);
+  background: #F8FBFF;
   transform: translateY(-2px);
+  box-shadow: 0 8px 20px rgba(0, 102, 255, 0.2);
 }
 
 /* Print Styles */

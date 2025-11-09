@@ -3,17 +3,29 @@
   justify-content: center;
   align-items: center;
   min-height: 100vh;
-  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  background: #FFFFFF;
   padding: 20px;
+  position: relative;
+}
+
+.login-container::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 4px;
+  background: linear-gradient(90deg, #0066FF 0%, #003D99 50%, #0066FF 100%);
 }
 
 .login-card {
   background: white;
-  border-radius: 16px;
-  box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
-  padding: 40px;
+  border-radius: 8px;
+  box-shadow: 0 4px 20px rgba(0, 61, 153, 0.08);
+  padding: 48px 40px;
   width: 100%;
-  max-width: 440px;
+  max-width: 480px;
+  border: 2px solid #E8F0FE;
 }
 
 .login-header {
@@ -21,16 +33,31 @@
   margin-bottom: 30px;
 }
 
-.login-header h1 {
-  font-size: 24px;
-  font-weight: 700;
-  color: #1a202c;
-  margin-bottom: 8px;
+.login-header {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  justify-content: center;
 }
 
-.login-header p {
-  font-size: 16px;
-  color: #718096;
+.site-logo {
+  width: 120px;
+  height: auto;
+  object-fit: contain;
+}
+
+.login-title h1 {
+  font-size: 20px;
+  font-weight: 800;
+  letter-spacing: 0.6px;
+  color: var(--primary);
+  margin: 0;
+}
+
+.login-title p {
+  font-size: 12px;
+  color: var(--muted);
+  margin: 0;
 }
 
 .login-form {
@@ -70,6 +97,43 @@
   cursor: not-allowed;
 }
 
+.password-input-wrapper {
+  position: relative;
+  display: flex;
+  align-items: center;
+}
+
+.password-input-wrapper input {
+  width: 100%;
+  padding-right: 48px;
+}
+
+.toggle-password {
+  position: absolute;
+  right: 12px;
+  background: transparent;
+  border: none;
+  cursor: pointer;
+  font-size: 22px;
+  padding: 4px 8px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: transform 0.2s;
+  opacity: 0.6;
+  color: #4a5568;
+}
+
+.toggle-password:hover:not(:disabled) {
+  opacity: 1;
+  transform: scale(1.1);
+}
+
+.toggle-password:disabled {
+  cursor: not-allowed;
+  opacity: 0.3;
+}
+
 .error-message {
   background-color: #fed7d7;
   color: #c53030;
@@ -80,7 +144,8 @@
 }
 
 .login-button {
-  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  background: #22A2F2;
+  background: radial-gradient(circle, rgba(34, 162, 242, 1) 0%, rgba(4, 104, 191, 1) 0%, rgba(2, 62, 115, 1) 85%);
   color: white;
   padding: 14px 24px;
   border: none;

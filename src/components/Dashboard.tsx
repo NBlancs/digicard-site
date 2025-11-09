@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
+import { IoClipboardOutline, IoCopyOutline, IoCreateOutline, IoTrashOutline } from 'react-icons/io5';
 import { supabase } from '../lib/supabase';
 import type { Student } from '../types/database';
 import './Dashboard.css';
@@ -19,6 +20,8 @@ const Dashboard: React.FC = () => {
   const [showAddForm, setShowAddForm] = useState(false);
   const [newStudent, setNewStudent] = useState({ full_name: '', school_id: '', program: '' });
   const [message, setMessage] = useState<{ text: string; type: 'success' | 'error' }>({ text: '', type: 'success' });
+  const [currentPage, setCurrentPage] = useState(1);
+  const studentsPerPage = 10;
 
   useEffect(() => {
     fetchStudents();
@@ -120,6 +123,31 @@ const Dashboard: React.FC = () => {
   const copyLink = (link: string) => {
     navigator.clipboard.writeText(link);
     showMessage('✓ Card link copied to clipboard!', 'success');
+  };
+
+  // Pagination logic
+  const indexOfLastStudent = currentPage * studentsPerPage;
+  const indexOfFirstStudent = indexOfLastStudent - studentsPerPage;
+  const currentStudents = students.slice(indexOfFirstStudent, indexOfLastStudent);
+  const totalPages = Math.ceil(students.length / studentsPerPage);
+
+  const goToPage = (pageNumber: number) => {
+    setCurrentPage(pageNumber);
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+  };
+
+  const goToNextPage = () => {
+    if (currentPage < totalPages) {
+      setCurrentPage(currentPage + 1);
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+    }
+  };
+
+  const goToPreviousPage = () => {
+    if (currentPage > 1) {
+      setCurrentPage(currentPage - 1);
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+    }
   };
 
   if (loading) {
@@ -245,7 +273,7 @@ const Dashboard: React.FC = () => {
       <div className="table-container">
         {students.length === 0 ? (
           <div className="empty-state">
-            <span className="empty-icon">📋</span>
+            <IoClipboardOutline className="empty-icon" />
             <h3>No Students Found</h3>
             <p>Start scanning QR codes or add students manually</p>
           </div>
@@ -253,21 +281,15 @@ const Dashboard: React.FC = () => {
           <table className="students-table">
             <thead>
               <tr>
+                <th>Digital Card</th>
                 <th>Full Name</th>
                 <th>School ID</th>
-                <th>Program</th>
-                <th>Digital Card</th>
                 <th>Actions</th>
               </tr>
             </thead>
             <tbody>
-              {students.map((student) => (
+              {currentStudents.map((student) => (
                 <tr key={student.id}>
-                  <td>{student.full_name}</td>
-                  <td>{student.school_id}</td>
-                  <td>
-                    <span className="badge">{student.program}</span>
-                  </td>
                   <td>
                     <div className="card-link-cell">
                       <button
@@ -281,10 +303,12 @@ const Dashboard: React.FC = () => {
                         className="copy-button"
                         title="Copy link"
                       >
-                        📋
+                        <IoCopyOutline />
                       </button>
                     </div>
                   </td>
+                  <td>{student.full_name}</td>
+                  <td>{student.school_id}</td>
                   <td>
                     <div className="action-buttons">
                       <button
@@ -297,14 +321,14 @@ const Dashboard: React.FC = () => {
                         className="btn-icon-action edit"
                         title="Edit"
                       >
-                        ✏️
+                        <IoCreateOutline />
                       </button>
                       <button
                         onClick={() => handleDelete(student.id, student.full_name)}
                         className="btn-icon-action delete"
                         title="Delete"
                       >
-                        🗑️
+                        <IoTrashOutline />
                       </button>
                     </div>
                   </td>
@@ -315,8 +339,44 @@ const Dashboard: React.FC = () => {
         )}
       </div>
 
+      {/* Pagination */}
+      {students.length > studentsPerPage && (
+        <div className="pagination">
+          <button 
+            onClick={goToPreviousPage} 
+            disabled={currentPage === 1}
+            className="pagination-btn"
+          >
+            Previous
+          </button>
+          
+          <div className="pagination-numbers">
+            {Array.from({ length: totalPages }, (_, i) => i + 1).map((pageNumber) => (
+              <button
+                key={pageNumber}
+                onClick={() => goToPage(pageNumber)}
+                className={`pagination-number ${currentPage === pageNumber ? 'active' : ''}`}
+              >
+                {pageNumber}
+              </button>
+            ))}
+          </div>
+          
+          <button 
+            onClick={goToNextPage} 
+            disabled={currentPage === totalPages}
+            className="pagination-btn"
+          >
+            Next
+          </button>
+        </div>
+      )}
+
       <div className="dashboard-footer">
-        <p>Total Students: <strong>{students.length}</strong></p>
+        <p>
+          Showing {indexOfFirstStudent + 1} to {Math.min(indexOfLastStudent, students.length)} of <strong>{students.length}</strong> students
+          {totalPages > 1 && <span> • Page {currentPage} of {totalPages}</span>}
+        </p>
       </div>
     </div>
   );
