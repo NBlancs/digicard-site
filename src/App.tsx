@@ -6,6 +6,7 @@ import Login from './components/Login';
 import Dashboard from './components/Dashboard';
 import QRScanner from './components/QRScanner';
 import DigitalCard from './components/DigitalCard';
+import logo from './assets/site_logo.png';
 import './App.css';
 
 const App: React.FC = () => {
@@ -65,6 +66,7 @@ const App: React.FC = () => {
                   <nav className="navbar">
                     <div className="nav-content">
                       <div className="nav-brand">
+                        <img src={logo} alt="SITE Logo" className="nav-logo" />
                         <span className="brand-text">SITE ID Scanner & Digital Card</span>
                       </div>
                       <div className="nav-links">
